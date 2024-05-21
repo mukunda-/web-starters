@@ -9,11 +9,7 @@
     "dev:server": "node test-server.js",
     "dev": "concurrently npm:dev:*",
     "build": "webpack --mode production",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "webpack-prod": "webpack --mode production",
-    "webpack-dev": "webpack --mode development --watch",
-    "sass-lab": "sass --watch ./css/teamnotes.scss:./lab/c/teamnotes.css",
-    "sass-ext": "sass --watch ./css/:./extension/c/"
+    "build-dev": "webpack --mode development"
   },
   "keywords": [],
   "author": "Mukunda Johnson",

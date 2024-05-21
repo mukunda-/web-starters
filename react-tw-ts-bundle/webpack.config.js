@@ -5,6 +5,7 @@ import pkg from 'webpack';
 const { DefinePlugin } = pkg;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import path from 'path';
 
 // For minification in production builds.
 import TerserPlugin from 'terser-webpack-plugin';
@@ -45,7 +46,7 @@ export default (env, argv) => {
       entry: {
          hello: {
             import: ["./src/hello.tsx", "./src/hello.css"],
-            filename: "./dist/bundle.js"
+            filename: "./bundle.js"
          },
          // Add other entry points here to create additional bundle files.
       },
@@ -61,7 +62,7 @@ export default (env, argv) => {
 
       output: {
          // Output files relative to project directory.
-         path: __dirname,
+         path: path.resolve(__dirname, 'dist'),
       },
 
       module: {
@@ -89,7 +90,7 @@ export default (env, argv) => {
       optimization,
       plugins: [
          new ESLintPlugin({
-            extensions: ['js', 'ts', 'tsx']
+            extensions: ['js', 'jsx', 'ts', 'tsx']
          }),
          new DefinePlugin({
             __PRODUCTION: JSON.stringify(production),
@@ -100,7 +101,7 @@ export default (env, argv) => {
          new CopyWebpackPlugin({
             patterns: [{
                from: './src/*.html',
-               to: 'dist/[name][ext]',
+               to: '[name][ext]',
                transform(content) {
                   // For cachebusting.
                   return content.toString().replaceAll("{{buildtime}}", buildtime);
@@ -109,14 +110,14 @@ export default (env, argv) => {
             // Additional copies can be added here.
             // {
             //    from: './res/*',
-            //    to: 'dist/',
+            //    to: '',
             // },
             // {
             //    from: './manifest.json',
-            //    to: 'dist/',
+            //    to: '',
             // }
             ]
          }),
       ]
-   }
+   };
 };
