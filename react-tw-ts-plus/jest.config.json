@@ -1,0 +1,12 @@
+{
+   "testEnvironment": "jsdom",
+   "moduleFileExtensions": ["js", "json", "ts", "tsx"],
+   "rootDir": "src",
+   "testRegex": ".*\\.spec\\.tsx?$",
+   "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+   },
+   "globals": {
+      "jesting": true
+   }
+}
